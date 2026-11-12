@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node-terminal",
+      "command": "npm test",
+      "request": "launch",
+      "name": "Test all"
+    },
+    {
+      "type": "node-terminal",
+      "command": "npm test ${fileBasename}",
+      "request": "launch",
+      "name": "Test current file"
+    }
+  ]
+}

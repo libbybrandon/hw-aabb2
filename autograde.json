@@ -1,0 +1,22 @@
+[
+  {
+    "testName": "sanity",
+    "points": 10
+  },
+  {
+    "testName": "init",
+    "points": 10
+  },
+  {
+    "testName": "add",
+    "points": 10
+  },
+  {
+    "testName": "calc",
+    "points": 10
+  },
+  {
+    "testName": "intersect",
+    "points": 10
+  }
+]
