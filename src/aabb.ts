@@ -16,16 +16,25 @@ export type Aabb = {
  * values respectively.
  */
 export const initAabb = (): Aabb => {
-  // IMPLEMENT
-  return null;
+  return {
+    minX: Infinity,
+    maxX: -Infinity,
+    minY: Infinity,
+    maxY: -Infinity,
+  }
 };
+
+
 
 /**
  * Adds a point to a bounding box. If the point is outside the bounding box, the
  * box's extents will grow. If it is inside the box, this has no effect.
  */
 export const addPoint = (aabb: Aabb, x: number, y: number): void => {
-  // IMPLEMENT
+  aabb.minX = Math.min(aabb.minX, x);
+  aabb.maxX = Math.max(aabb.maxX, x);
+  aabb.minY = Math.min(aabb.minY, y);
+  aabb.maxY = Math.max(aabb.maxY, y);
 };
 
 /**
@@ -34,7 +43,8 @@ export const addPoint = (aabb: Aabb, x: number, y: number): void => {
  */
 export const hasData = (aabb: Aabb): boolean => {
   // IMPLEMENT
-  return false;
+  return aabb.minX <= aabb.maxX &&
+         aabb.minY <= aabb.maxY;
 };
 
 /**
@@ -44,16 +54,20 @@ export const hasData = (aabb: Aabb): boolean => {
  * zero in that case.
  */
 export const getHeight = (aabb: Aabb): number => {
-  // IMPLEMENT
-  return NaN;
+  if (!hasData(aabb)){
+      return NaN;
+  }
+  return aabb.maxY - aabb.minY;
 };
 
 /**
  * Just like getHeight, but for width.
  */
 export const getWidth = (aabb: Aabb): number => {
-  // IMPLEMENT
+  if (!hasData(aabb)) {
   return NaN;
+  }
+  return aabb.maxX - aabb.minX;
 };
 
 /**
@@ -61,8 +75,10 @@ export const getWidth = (aabb: Aabb): number => {
  * have data (according to `hasData`) this returns NaN.
  */
 export const getArea = (aabb: Aabb): number => {
-  // IMPLEMENT
-  return NaN;
+  if (!hasData(aabb)){
+    return NaN;
+  }
+  return getWidth(aabb) * getHeight(aabb);
 };
 
 /**
@@ -72,6 +88,19 @@ export const getArea = (aabb: Aabb): number => {
  * initAabb().
  **/
 export const intersect = (box1: Aabb, box2: Aabb): Aabb => {
-  // IMPLEMENT
-  return null;
+    const minX= Math.max(box1.minX, box2.minX);
+    const maxX= Math.min(box1.maxX, box2.maxX);
+    const minY= Math.max(box1.minY, box2.minY);
+    const maxY= Math.min(box1.maxY, box2.maxY);
+
+    if (minX > maxX || minY > maxY) {
+        return initAabb();
+    }
+    return {
+        minX: minX,
+        maxX: maxX,
+        minY: minY,
+        maxY: maxY,
+    };
 };
+
